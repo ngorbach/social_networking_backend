@@ -159,3 +159,5 @@ INSTALLED_APPS.append('users')
 AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS.append('social')
+
+Access-Control-Allow-Origin: *
