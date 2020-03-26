@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install nano
 
 RUN mkdir -p /backend
 
-COPY ./backend/requirements.yml /backend/requirements.yml
+COPY ./requirements.yml /backend/requirements.yml
 RUN /opt/conda/bin/conda env create -f requirements.yml
 ENV PATH /opt/conda/envs/backend/bin:$PATH
 
