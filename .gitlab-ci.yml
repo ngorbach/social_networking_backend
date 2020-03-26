@@ -10,14 +10,14 @@ before_script:
 pull:
   stage: pull
   tags:
-  - digital_ocean
+  - digital-ocean
   script:
     - docker pull "$CI_REGISTRY_IMAGE":latest
 
 build:
   stage: build
   tags:
-  - digital_ocean
+  - digital-ocean
   script:
     - docker build --tag="$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" --cache-from="$CI_REGISTRY_IMAGE":latest .
 
