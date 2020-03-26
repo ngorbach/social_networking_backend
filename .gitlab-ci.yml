@@ -1,0 +1,52 @@
+stages:
+  - pull
+  - build
+  - lint
+  - push
+
+before_script:
+  - docker login -u "gitlab-ci-token" -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+
+pull:
+  stage: pull
+  tags:
+  - digital_ocean
+  script:
+    - docker pull "$CI_REGISTRY_IMAGE":latest
+
+build:
+  stage: build
+  tags:
+  - digital_ocean
+  script:
+    - docker build --tag="$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" --cache-from="$CI_REGISTRY_IMAGE":latest .
+
+#lint:
+#  stage: lint
+#  only:
+#    - master
+#  tags:
+#  - digital_ocean
+#  script:
+#    - export CI_PIPELINE_ID=$CI_PIPELINE_ID
+#    - export CI_BUILD_REF_NAME=$CI_COMMIT_REF_NAME
+#    - docker-compose -p "$CI_PIPELINE_ID" -f docker-compose.ci.yml run app flake8 .
+
+push image:
+  stage: push
+  only:
+    - master
+    - tags
+  tags:
+  - digital_ocean
+  script:
+    - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
+    - docker push "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
+
+push latest:
+  stage: push
+  tags:
+  - digital_ocean
+  script:
+    - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":latest
+    - docker push "$CI_REGISTRY_IMAGE":latest
