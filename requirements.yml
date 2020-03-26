@@ -1,0 +1,14 @@
+name: backend
+
+dependencies:
+  - python=3.6
+  - psycopg2
+  - pip:
+    - Django
+    - djangorestframework
+    - markdown
+    - djangorestframework_simplejwt
+    - coreapi
+    - psycopg2-binary
+    - gunicorn
+    - django-cors-headers
