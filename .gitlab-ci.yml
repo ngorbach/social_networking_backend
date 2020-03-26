@@ -38,7 +38,7 @@ push image:
     - master
     - tags
   tags:
-  - digital_ocean
+  - digital-ocean
   script:
     - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
     - docker push "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
@@ -46,7 +46,7 @@ push image:
 push latest:
   stage: push
   tags:
-  - digital_ocean
+  - digital-ocean
   script:
     - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":latest
     - docker push "$CI_REGISTRY_IMAGE":latest
