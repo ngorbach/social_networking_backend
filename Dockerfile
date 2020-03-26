@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install nano
 RUN mkdir -p /backend
 
 COPY ./backend/requirements.yml /backend/requirements.yml
-RUN /opt/conda/bin/conda env create -f /backend/requirements.yml
+RUN /opt/conda/bin/conda env create -f requirements.yml
 ENV PATH /opt/conda/envs/backend/bin:$PATH
 
 RUN echo "source activate backend" >~/.bashrc
@@ -15,6 +15,6 @@ RUN echo "source activate backend" >~/.bashrc
 COPY ./scripts /scripts
 RUN chmod +x ./scripts*
 
-COPY ./backend /backend
+COPY . /backend
 
 WORKDIR /backend
