@@ -1,5 +1,5 @@
 <div align='center'>
-<h1>Week 8 Motion Assignment - Backend</h1>
+<h1>Social Networking Site - Backend</h1>
 </div>
 
 ## Getting Started
